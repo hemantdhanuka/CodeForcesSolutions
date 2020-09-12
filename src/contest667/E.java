@@ -20,7 +20,7 @@ public class E {
             for(int j=0;j<n;j++){
                 xCord[j] = s.nextInt();
             }
-            //wasting y cordinate data
+            //reading y cordinate data but of no use
             for(int j=0;j<n;j++){
                 s.nextInt();
             }
@@ -37,6 +37,8 @@ public class E {
     private static int solve(long[] xCord, int k) {
         int n = xCord.length;
         int ans[] = new int[n];
+
+        // step 2 for each position calculating points
         int ptr1=0;
         int ptr2=0;
         while(ptr1<n){
@@ -48,14 +50,15 @@ public class E {
             ptr1++;
         }
 
-        int picheSeMax[] = new int[n];
+        //step 3, for each position find right max
+        int maxRight[] = new int[n];
         int max = 0;
         for(int i=n-1;i>=0;i--){
             max = Math.max(max,ans[i]);
-            picheSeMax[i] = max;
+            maxRight[i] = max;
         }
 
-
+        //step 4 calculating final anser
         int finalMaxAnswer = 0;
         int i =0;
         while(true){
@@ -64,7 +67,7 @@ public class E {
                 finalMaxAnswer = Math.max(finalMaxAnswer,ans[i]);
                 break;
             }
-            finalMaxAnswer = Math.max(finalMaxAnswer,ans[i] + picheSeMax[j]);
+            finalMaxAnswer = Math.max(finalMaxAnswer,ans[i] + maxRight[j]);
             i++;
         }
         return finalMaxAnswer;
